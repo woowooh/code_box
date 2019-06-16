@@ -22,15 +22,25 @@ class JSONComparer(object):
 		#a {{
 			width: 50%;
 			float: left;
+			overflow-y: scroll;
+			overflow-x: scroll;
 		}}
 		#b {{
 			width: 50%;
 			padding:0;
 			position:relative;
 			float: left;
+			overflow-y: scroll;
+			overflow-x: scroll;
 		}}
 		.warn {{
 			background-color: rgb(232, 36, 107);
+		}}
+		body {{
+			font-family: menlo,monospace, Tahoma,"微软雅黑","幼圆";
+			font-size: 2.0vh;	
+			font-weight: bold;	
+			color: rgb(40, 41, 35);	
 		}}
 	</style>
 </head>
