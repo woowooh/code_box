@@ -119,8 +119,8 @@ class JSONComparer(object):
 		return l1_copy, l2_copy		
 
 	def _HTML_from_elements(self, l, target_l):		
-		dic_template = '{indent}<span class="{cls_name}">"{key}"</span>:<span class="{cls_name}">"{value}"</span>'
-		lst_template = '{indent}<span class="{cls_name}">"{value}</span>"'
+		dic_template = '{indent}<span class="{cls_name}">"{key}"</span>:<span class="{cls_name}">{value}</span>'
+		lst_template = '{indent}<span class="{cls_name}">{value}</span>"'
 		m = self._init_HTML_space(15)
 		r = ""
 		for i, item in enumerate(l):	
@@ -131,6 +131,8 @@ class JSONComparer(object):
 				n = item[-1]
 				if item in target_l:
 					cls_name = "warn"
+				if isinstance(value, str):
+					value = '"{}"'.format(value)
 				r += dic_template.format(indent=m[n], key=key, value=value, cls_name=cls_name)			
 				index = i + 1
 				if (index < len(l) and (l[index][0] not in self.ph_r)):
@@ -152,7 +154,9 @@ class JSONComparer(object):
 					r += "<br>" 				
 				else:
 					if item in target_l:
-						cls_name = "warn"								
+						cls_name = "warn"	
+					if isinstance(char, str):
+						char = '"{}"'.format(char)								
 					r += lst_template.format(indent=m[n], value=char, cls_name=cls_name)			
 					index = i + 1					
 					if (index < len(l) and (l[index][0] in self.ph_r)):
