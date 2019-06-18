@@ -33,14 +33,21 @@ class JSONComparer(object):
             overflow-x: scroll;
         }}
         .warn {{
-            background-color: rgb(232, 36, 107);
+            border-radius: 2px;
+            border: 2px solid red;
         }}
         body {{
             font-family: menlo,monospace, Tahoma,"微软雅黑","幼圆";
-            font-size: 2.0vh;   
+            font-size: 1.7vh;   
             font-weight: bold;  
             color: rgb(40, 41, 35); 
             background-color: #f6f6f6;
+        }}
+        .key {{
+            color: rgb(163, 0, 142);
+        }}
+        .value {{
+            color: rgb(0, 191, 77);
         }}
     </style>
 </head>
@@ -118,7 +125,7 @@ class JSONComparer(object):
         return l1_intersection, l2_intersection     
 
     def _HTML_from_elements(self, l, target_l):     
-        dic_template = '{indent}<span class="{cls_name}">"{key}"</span>:<span class="{cls_name}">{value}</span>'
+        dic_template = '{indent}<span class="key {cls_name}">"{key}"</span>:<span class="value {cls_name}">{value}</span>'
         lst_template = '{indent}<span class="{cls_name}">{value}</span>'
         m = self._init_HTML_space(15)
         r = ""
@@ -159,6 +166,9 @@ class JSONComparer(object):
                         char = '"{}"'.format(char)                              
                     if (typ == 0):
                         char += ":"
+                        cls_name = "key " + cls_name
+                    else:
+                        cls_name = "value " + cls_name
                     index = i + 1                   
                     r += lst_template.format(indent=m[n], value=char, cls_name=cls_name)                                            
                     if (typ == 1) and (l[index][0] not in self.ph_r):
