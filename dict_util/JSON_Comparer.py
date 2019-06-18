@@ -22,16 +22,14 @@ class JSONComparer(object):
     <style>
         #a {{
             width: 50%;
-            float: left;
-            overflow-y: scroll;
+            float: left;            
             overflow-x: scroll;
         }}
         #b {{
             width: 50%;
             padding:0;
             position:relative;
-            float: left;
-            overflow-y: scroll;
+            float: left;            
             overflow-x: scroll;
         }}
         .warn {{
@@ -42,6 +40,7 @@ class JSONComparer(object):
             font-size: 2.0vh;   
             font-weight: bold;  
             color: rgb(40, 41, 35); 
+            background-color: #f6f6f6;
         }}
     </style>
 </head>
