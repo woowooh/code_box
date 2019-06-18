@@ -6,62 +6,62 @@ s = '{"responseCode":200,"message":[],"data":{"incidents":{"isDistribute":false,
 ja = s
 
 def init_HTML_space(n):
-	HTML_space_map = {}
-	for i in range(n):
-		HTML_space_map[i] = "&ensp;&ensp;" * i	
-	return HTML_space_map
+    HTML_space_map = {}
+    for i in range(n):
+        HTML_space_map[i] = "&ensp;&ensp;" * i  
+    return HTML_space_map
 
 
 def process(j):
-	brackets_left =  ["{", "["]
-	brackets_right = ["}", "]"]
-	separator_list = [","]
-	n = 0
-	r = []
-	space_map = init_HTML_space(15)
-	changed = False	
-	for i, char in enumerate(j):	
-		if char == " ":
-			continue
-		if changed:
-			r.append(space_map[n])	
-			changed = False
-		if (char in brackets_left):									
-			r.append(char + "<br>")
-			n += 1
-			changed = True
-		elif (char in brackets_right):
-			n -= 1
-			r.append("<br>" + space_map[n] + char)					
-		else:
-			r.append(char)
-			if (char in separator_list):				
-				r.append("<br>")
-				changed = True
-			if (i > 1) and (char in brackets_left) and (j[i - 1] == ":"):
-				r.append("<br>")
-	return r
+    brackets_left =  ["{", "["]
+    brackets_right = ["}", "]"]
+    separator_list = [","]
+    n = 0
+    r = []
+    space_map = init_HTML_space(15)
+    changed = False 
+    for i, char in enumerate(j):    
+        if char == " ":
+            continue
+        if changed:
+            r.append(space_map[n])  
+            changed = False
+        if (char in brackets_left):                                 
+            r.append(char + "<br>")
+            n += 1
+            changed = True
+        elif (char in brackets_right):
+            n -= 1
+            r.append("<br>" + space_map[n] + char)                  
+        else:
+            r.append(char)
+            if (char in separator_list):                
+                r.append("<br>")
+                changed = True
+            if (i > 1) and (char in brackets_left) and (j[i - 1] == ":"):
+                r.append("<br>")
+    return r
 
 
-def create_report(l):	
-	template = """
+def create_report(l):   
+    template = """
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+    <title></title>
 </head>
 <body>
 {result}
 </body>
 </html>
-		"""
-	r = "".join(l)
-	return template.format(result=r)
+        """
+    r = "".join(l)
+    return template.format(result=r)
 
 
 def _main():
-	l = process(ja)
-	print(create_report(l))
+    l = process(ja)
+    print(create_report(l))
 
 if __name__ == "__main__":
-	_main()
+    _main()
