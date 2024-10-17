@@ -3,7 +3,11 @@
 class Dataset:
     
     def input_digit(self):
-        d = [-1, 0, 1]
+        d = [
+            -1,
+             0,
+             1,
+        ]
         return d
 
     def input_str(self):
@@ -27,7 +31,7 @@ class Dataset:
     def input_timestamp_int(self):
         d = [
             1696948800,
-            1893456123
+            1893456123,
         ]
         return d
     
@@ -56,7 +60,12 @@ class Dataset:
         return d
     
     def input_long(self):
-        d = [-2147483648, 2147483647, 2147483648, -2147483649]
+        d = [
+            -2147483648,
+             2147483647,
+             2147483648,
+             -2147483649,
+        ]
         return d
     
     def input_float(self):
@@ -77,12 +86,14 @@ class Dataset:
 
     def input_long_char(self):
         s = "这个测试" * 1000
-        d = [s]
+        d = [
+            s,
+        ]
         return d
 
     def input_emoji(self):
         d = [
-            "😀"
+            "😀",
         ]
         return d
 
@@ -92,7 +103,7 @@ class Dataset:
             "'; SELECT * FROM users; --",
             "' AND 1=1 --",
             "' AND 1=0 --",
-            "' UNION SELECT null, username, password FROM users --"
+            "' UNION SELECT null, username, password FROM users --",
         ]
         return d
 
