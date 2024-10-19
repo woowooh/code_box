@@ -1,3 +1,4 @@
+import copy
 
 
 class Dataset:
@@ -107,6 +108,14 @@ class Dataset:
         ]
         return d
 
+    def input_forbidden(self):
+        d = [
+            "毒品",
+            "涉黄",
+            "赌场",
+        ]
+        return d
+
     def get_all_input(self, target=None):
         attribute_n_methods = dir(self)
         if target:
@@ -120,12 +129,50 @@ class Dataset:
                     r.extend(d)
         return r
 
+    def replace_and_post_args(self, d: dict, action):
+        for k, v in d.items():
+            if isinstance(v, list):
+                self.recursive_list(k, v, action, d)
+            elif isinstance(v, dict):
+                self.recursive_dict(k, v, action, d)
+            else:
+                for arg in self.get_all_input():
+                    old = v
+                    d[k] = arg
+                    action(d)
+                    d[k] = old
+
+    def recursive_dict(self, prev_key, d, action, source_d):
+        for k, v in d.items():
+            if isinstance(v, list):
+                self.recursive_list(k, v, action, source_d)
+            elif isinstance(v, dict):
+                self.recursive_dict(k, v, action, source_d)
+            else:
+                for arg in self.get_all_input():
+                    old = v
+                    d[k] = arg
+                    action(source_d)
+                    d[k] = old
+
+    def recursive_list(self, prev_key, l, action, source_d):
+        for i, v in enumerate(l):
+            if isinstance(v, list):
+                self.recursive_list(prev_key, v, action, source_d)
+            elif isinstance(v, dict):
+                self.recursive_dict(prev_key, v, action, source_d)
+            else:
+                for arg in self.get_all_input():
+                    old = v
+                    l[i] = arg
+                    action(source_d)
+                    l[i] = old
+
 
 def _main():
     e = Dataset()
-    r = e.get_all_input()
-    for e in r:
-        print(e)
+    t = {"a": "b", "重叠": [1, 2, 3], "dict": {"fff": "ccc"}}
+    e.replace_and_post_args(t, print)
 
 
 _main()
