@@ -116,6 +116,12 @@ class Dataset:
         ]
         return d
 
+    def input_None(self):
+        d = [
+            None
+        ]
+        return d
+
     def get_all_input(self, target=None):
         attribute_n_methods = dir(self)
         if target:
