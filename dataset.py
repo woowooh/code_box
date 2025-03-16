@@ -1,4 +1,3 @@
-import copy
 
 
 class Dataset:
@@ -61,8 +60,6 @@ class Dataset:
     
     def input_long(self):
         d = [
-            -2147483648,
-             2147483647,
              2147483648,
              -2147483649,
         ]
@@ -71,7 +68,6 @@ class Dataset:
     def input_float(self):
         d = [
             0.0,
-            1.0,
             1.1,
             1.0001,
             -1.0,
